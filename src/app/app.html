@@ -1,1 +1,10 @@
-<app-todo-list></app-todo-list>  <!-- ✅ utilise bien le selector -->
+<header class="p-3" style="border-bottom:1px solid #eee;">
+  <nav style="display:flex; gap:1rem;">
+    <a routerLink="/todos" routerLinkActive="active">Todos</a>
+    <a routerLink="/about" routerLinkActive="active">About</a>
+  </nav>
+</header>
+
+<main class="p-4">
+  <router-outlet></router-outlet>
+</main>

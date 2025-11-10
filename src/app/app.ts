@@ -1,10 +1,10 @@
 import { Component, signal } from '@angular/core';
-import { TodoList } from './features/todos/todo-list/todo-list';
+import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router'; // ✅ AJOUTE ÇA
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [TodoList],               // ✅ juste le composant
+  imports: [RouterOutlet, RouterLink, RouterLinkActive], // ✅ ok
   templateUrl: './app.html',
   styleUrls: ['./app.scss'],
 })
