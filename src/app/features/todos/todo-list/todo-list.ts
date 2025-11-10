@@ -1,29 +1,24 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { TodoService } from '../../../core/services/todo.service';// ✅ chemin relatif
+ 
 
 @Component({
   selector: 'app-todo-list',
-  standalone: true,
-  imports: [CommonModule, FormsModule],     // ✅ nécessaire
+  standalone: true,                       // ✅ indispensable
+  imports: [CommonModule, FormsModule],
   templateUrl: './todo-list.html',
   styleUrls: ['./todo-list.scss'],
 })
 export class TodoList {
   title = 'Mes tâches';
-  todos = ['Apprendre Angular', 'Coder un composant', 'Boire un café'];
+  newTodo = '';
 
-  newTodo = '';                              // ✅ utilisé par [(ngModel)]
+  // ✅ Injection classique (pas "import type")
+  constructor(public todoService: TodoService) {}
 
-  addTodo() {                                // ✅ utilisé par (click)
-    const v = this.newTodo.trim();
-    if (v) {
-      this.todos = [...this.todos, v];
-      this.newTodo = '';
-    }
-  }
-
-  removeTodo(i: number) {                    // ✅ utilisé par (click)
-    this.todos = this.todos.filter((_, idx) => idx !== i);
-  }
+  addTodo() { this.todoService.add(this.newTodo); this.newTodo = ''; }
+  removeTodo(i: number) { this.todoService.remove(i); }
+  clearAll() { this.todoService.clear(); }
 }
