@@ -1,0 +1,16 @@
+<h2>{{ title }}</h2>
+
+<p *ngIf="todos.length === 0">Aucune tâche pour le moment 🎉</p>
+<p *ngIf="todos.length > 0">Tu as {{ todos.length }} tâche(s) en cours.</p>
+
+<div class="toolbar">
+  <input type="text" placeholder="Nouvelle tâche" [(ngModel)]="newTodo" />
+  <button (click)="addTodo()">Ajouter</button>
+</div>
+
+<ul>
+  <li *ngFor="let t of todos; let i = index">
+    {{ i + 1 }}. {{ t }}
+    <button class="delete" (click)="removeTodo(i)">×</button>
+  </li>
+</ul>

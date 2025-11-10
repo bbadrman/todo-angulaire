@@ -1,0 +1,12 @@
+.toolbar {
+  display: flex; gap: .5rem; margin: .5rem 0;
+  input { flex: 1; padding: .4rem .6rem; }
+  button { padding: .42rem .7rem; }
+}
+ul { list-style: none; padding: 0; }
+li { display: flex; justify-content: space-between; padding: .35rem 0; }
+.delete { background: transparent; border: 1px solid #ddd; border-radius: .4rem; }
+.important {
+  font-weight: bold;
+  color: green;
+}
