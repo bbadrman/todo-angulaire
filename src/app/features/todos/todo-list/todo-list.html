@@ -1,18 +1,35 @@
 <h2>{{ title }}</h2>
 
+<!-- Compteur -->
 <p *ngIf="todoService.todos().length === 0">Aucune tâche pour le moment 🎉</p>
 <p *ngIf="todoService.todos().length > 0">
-  Tu as {{ todoService.todos().length }} tâche(s).
+  {{ todoService.remaining() }} à faire / {{ todoService.todos().length }} au total
 </p>
 
-<!-- ✅ utilise le composant formulaire -->
+<!-- Formulaire réactif -->
 <app-todo-form (add)="addTodo($event)"></app-todo-form>
 
+<!-- Filtres -->
+<div class="filters">
+  <button [class.active]="todoService.filter() === 'all'"       (click)="setFilter('all')">Toutes</button>
+  <button [class.active]="todoService.filter() === 'active'"    (click)="setFilter('active')">Actives</button>
+  <button [class.active]="todoService.filter() === 'completed'" (click)="setFilter('completed')">Terminées</button>
+</div>
+
+<!-- Liste filtrée -->
 <ul>
-  <li *ngFor="let t of todoService.todos(); let i = index">
-    {{ i + 1 }}. {{ t }}
-    <button class="delete" (click)="removeTodo(i)">×</button>
+  <li *ngFor="let t of todoService.filteredTodos(); let i = index; trackBy: trackById"
+      [class.done]="t.done">
+    <label class="row">
+      <input type="checkbox" [checked]="t.done" (change)="toggle(i)" />
+      <span class="text">{{ i + 1 }}. {{ t.text }}</span>
+    </label>
+    <button class="delete" (click)="removeTodo(i)" aria-label="Supprimer la tâche {{t.text}}">×</button>
   </li>
 </ul>
 
-<button (click)="clearAll()" *ngIf="todoService.todos().length">Vider</button>
+<!-- Actions -->
+<div class="actions" *ngIf="todoService.todos().length">
+  <button (click)="clearAll()">Tout vider</button>
+  <button (click)="clearCompleted()" [disabled]="!todoService.completed()">Supprimer les terminées</button>
+</div>

@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TodoService } from '../../../core/services/todo.service';
-import { TodoForm } from '../todo-form/todo-form';  // ✅
+import { TodoForm } from '../todo-form/todo-form';
 
 @Component({
   selector: 'app-todo-list',
   standalone: true,
-  imports: [CommonModule, TodoForm],                // ✅ pas de FormsModule ici
+  imports: [CommonModule, TodoForm],
   templateUrl: './todo-list.html',
   styleUrls: ['./todo-list.scss'],
 })
@@ -15,6 +15,11 @@ export class TodoList {
   constructor(public todoService: TodoService) {}
 
   addTodo(text: string) { this.todoService.add(text); }
-  removeTodo(i: number) { this.todoService.remove(i); }
-  clearAll() { this.todoService.clear(); }
+  removeTodo(i: number) { this.todoService.removeByIndex(i); }
+  toggle(i: number)     { this.todoService.toggleByIndex(i); }
+  clearAll()            { this.todoService.clear(); }
+  clearCompleted()      { this.todoService.clearCompleted(); }
+  setFilter(f: 'all' | 'active' | 'completed') { this.todoService.setFilter(f); }
+
+  trackById = (_: number, t: { id: string }) => t.id;
 }

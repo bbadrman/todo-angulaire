@@ -5,9 +5,9 @@ import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 @Component({
   selector: 'app-todo-form',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule], // ✅ ngIf + reactive forms
+  imports: [CommonModule, ReactiveFormsModule],
   template: `
-    <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
+    <form [formGroup]="form" (submit)="onSubmit()" novalidate>
       <div class="toolbar">
         <input
           type="text"
@@ -32,8 +32,6 @@ import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 })
 export class TodoForm {
   @Output() add = new EventEmitter<string>();
-
-  // ✅ évite "used before initialization"
   private fb = inject(FormBuilder);
 
   form = this.fb.group({
