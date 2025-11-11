@@ -1,24 +1,20 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { TodoService } from '../../../core/services/todo.service';// ✅ chemin relatif
- 
+import { TodoService } from '../../../core/services/todo.service';
+import { TodoForm } from '../todo-form/todo-form';  // ✅
 
 @Component({
   selector: 'app-todo-list',
-  standalone: true,                       // ✅ indispensable
-  imports: [CommonModule, FormsModule],
+  standalone: true,
+  imports: [CommonModule, TodoForm],                // ✅ pas de FormsModule ici
   templateUrl: './todo-list.html',
   styleUrls: ['./todo-list.scss'],
 })
 export class TodoList {
   title = 'Mes tâches';
-  newTodo = '';
-
-  // ✅ Injection classique (pas "import type")
   constructor(public todoService: TodoService) {}
 
-  addTodo() { this.todoService.add(this.newTodo); this.newTodo = ''; }
+  addTodo(text: string) { this.todoService.add(text); }
   removeTodo(i: number) { this.todoService.remove(i); }
   clearAll() { this.todoService.clear(); }
 }

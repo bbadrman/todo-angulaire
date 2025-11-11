@@ -5,11 +5,8 @@
   Tu as {{ todoService.todos().length }} tâche(s).
 </p>
 
-<div class="toolbar">
-  <input type="text" placeholder="Nouvelle tâche" [(ngModel)]="newTodo" />
-  <button (click)="addTodo()">Ajouter</button>
-  <button (click)="clearAll()">Vider</button>
-</div>
+<!-- ✅ utilise le composant formulaire -->
+<app-todo-form (add)="addTodo($event)"></app-todo-form>
 
 <ul>
   <li *ngFor="let t of todoService.todos(); let i = index">
@@ -17,3 +14,5 @@
     <button class="delete" (click)="removeTodo(i)">×</button>
   </li>
 </ul>
+
+<button (click)="clearAll()" *ngIf="todoService.todos().length">Vider</button>
