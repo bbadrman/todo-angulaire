@@ -89,4 +89,13 @@ export class TodoService {
     const v = text.trim(); if (!v) return;
     this.todos.update(list => list.map((t, i) => i === index ? { ...t, text: v } : t));
   }
+
+  // ajoute cette méthode dans la classe TodoService
+updateTextById(id: string, text: string) {
+  const v = text.trim();
+  if (!v) return;
+  this.todos.update(list =>
+    list.map(t => t.id === id ? { ...t, text: v } : t)
+  );
+}
 }

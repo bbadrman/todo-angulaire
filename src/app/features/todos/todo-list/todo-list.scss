@@ -18,3 +18,8 @@ li {
   background: transparent; border: 1px solid #ddd; border-radius: .5rem; padding: 0 .5rem; cursor: pointer;
 }
 .actions { display:flex; gap:.5rem; margin-top: .75rem; }
+.edit-input {
+  padding: .35rem .5rem;
+  min-width: 240px;
+}
+.text { cursor: text; }
