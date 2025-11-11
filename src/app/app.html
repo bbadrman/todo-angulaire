@@ -1,6 +1,7 @@
 <header class="p-3" style="border-bottom:1px solid #eee;">
   <nav style="display:flex; gap:1rem;">
-    <a routerLink="/todos" routerLinkActive="active">Todos</a>
+    <a routerLink="/todos" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Todos</a>
+    <a routerLink="/stats" routerLinkActive="active">Stats</a>   <!-- ✅ -->
     <a routerLink="/about" routerLinkActive="active">About</a>
   </nav>
 </header>

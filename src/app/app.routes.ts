@@ -5,12 +5,20 @@ export const routes: Routes = [
   { path: '', redirectTo: 'todos', pathMatch: 'full' },
   { path: 'todos', component: TodoList },
 
-  // lazy-load des pages
+  // ✅ Stats (lazy)
+  {
+    path: 'stats',
+    loadComponent: () =>
+      import('./pages/stats/stats').then(m => m.Stats)
+  },
+
+  // About (lazy)
   {
     path: 'about',
     loadComponent: () =>
       import('./pages/about/about').then(m => m.About)
   },
+  // 404 (lazy)
   {
     path: '**',
     loadComponent: () =>
