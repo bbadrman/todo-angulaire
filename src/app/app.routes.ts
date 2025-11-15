@@ -11,6 +11,12 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./pages/stats/stats').then(m => m.Stats)
   },
+// login (lazy)
+   {
+    path: 'login',
+    loadComponent: () =>
+      import('./pages/login/login').then(m => m.Login)
+  },
 
   // About (lazy)
   {

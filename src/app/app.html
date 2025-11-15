@@ -1,8 +1,19 @@
 <header class="p-3" style="border-bottom:1px solid #eee;">
-  <nav style="display:flex; gap:1rem;">
+  <nav style="display:flex; gap:1rem; align-items:center;">
     <a routerLink="/todos" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Todos</a>
-    <a routerLink="/stats" routerLinkActive="active">Stats</a>   <!-- ✅ -->
+    <a routerLink="/stats" routerLinkActive="active">Stats</a>
     <a routerLink="/about" routerLinkActive="active">About</a>
+
+    <span style="flex:1"></span>
+
+    <!-- Non connecté -->
+    <a *ngIf="!auth.isLoggedIn()" routerLink="/login" routerLinkActive="active">Login</a>
+
+    <!-- Connecté -->
+    <span *ngIf="auth.isLoggedIn()">
+      {{ auth.user()?.email }}
+      <button (click)="logout()">Logout</button>
+    </span>
   </nav>
 </header>
 
